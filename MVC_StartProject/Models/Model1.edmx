@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="KitaplikDBwebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KategoriTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KategoriAd" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="KitapTbl">
+          <Key>
+            <PropertyRef Name="KitapID" />
+          </Key>
+          <Property Name="KitapID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Adi" Type="varchar" MaxLength="80" />
+          <Property Name="Sayfano" Type="varchar" MaxLength="4" />
+          <Property Name="Yazar" Type="varchar" MaxLength="80" />
+          <Property Name="Kategori" Type="int" />
+        </EntityType>
+        <Association Name="FK_KitapTbl_KategoriTbl">
+          <End Role="KategoriTbl" Type="Self.KategoriTbl" Multiplicity="0..1" />
+          <End Role="KitapTbl" Type="Self.KitapTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategoriTbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapTbl">
+              <PropertyRef Name="Kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KitaplikDBwebModelStoreContainer">
+          <EntitySet Name="KategoriTbl" EntityType="Self.KategoriTbl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KitapTbl" EntityType="Self.KitapTbl" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_KitapTbl_KategoriTbl" Association="Self.FK_KitapTbl_KategoriTbl">
+            <End Role="KategoriTbl" EntitySet="KategoriTbl" />
+            <End Role="KitapTbl" EntitySet="KitapTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KitaplikDBwebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="KategoriTbl">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KategoriAd" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="KitapTbl" Relationship="Self.FK_KitapTbl_KategoriTbl" FromRole="KategoriTbl" ToRole="KitapTbl" />
+        </EntityType>
+        <EntityType Name="KitapTbl">
+          <Key>
+            <PropertyRef Name="KitapID" />
+          </Key>
+          <Property Name="KitapID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Adi" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Sayfano" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Yazar" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Kategori" Type="Int32" />
+          <NavigationProperty Name="KategoriTbl" Relationship="Self.FK_KitapTbl_KategoriTbl" FromRole="KitapTbl" ToRole="KategoriTbl" />
+        </EntityType>
+        <Association Name="FK_KitapTbl_KategoriTbl">
+          <End Role="KategoriTbl" Type="Self.KategoriTbl" Multiplicity="0..1" />
+          <End Role="KitapTbl" Type="Self.KitapTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KategoriTbl">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="KitapTbl">
+              <PropertyRef Name="Kategori" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KitaplikDBwebEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="KategoriTbl" EntityType="Self.KategoriTbl" />
+          <EntitySet Name="KitapTbl" EntityType="Self.KitapTbl" />
+          <AssociationSet Name="FK_KitapTbl_KategoriTbl" Association="Self.FK_KitapTbl_KategoriTbl">
+            <End Role="KategoriTbl" EntitySet="KategoriTbl" />
+            <End Role="KitapTbl" EntitySet="KitapTbl" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KitaplikDBwebModelStoreContainer" CdmEntityContainer="KitaplikDBwebEntities">
+          <EntitySetMapping Name="KategoriTbl">
+            <EntityTypeMapping TypeName="KitaplikDBwebModel.KategoriTbl">
+              <MappingFragment StoreEntitySet="KategoriTbl">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KategoriAd" ColumnName="KategoriAd" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KitapTbl">
+            <EntityTypeMapping TypeName="KitaplikDBwebModel.KitapTbl">
+              <MappingFragment StoreEntitySet="KitapTbl">
+                <ScalarProperty Name="KitapID" ColumnName="KitapID" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Sayfano" ColumnName="Sayfano" />
+                <ScalarProperty Name="Yazar" ColumnName="Yazar" />
+                <ScalarProperty Name="Kategori" ColumnName="Kategori" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

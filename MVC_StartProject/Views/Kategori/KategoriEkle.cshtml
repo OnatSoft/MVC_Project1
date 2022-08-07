@@ -1,0 +1,19 @@
+﻿@model MVC_StartProject.Models.KategoriTbl
+
+@{
+    ViewBag.Title = "KategoriEkle";
+    Layout = "~/Views/Shared/KitapLayout.cshtml";
+}
+
+
+<h2>Yeni Kategori Ekle</h2>
+<br /><br />
+
+<form method="post" class="form-group">
+    <div class="form-inline" style="margin-bottom: 20px;">
+        @Html.Label("Kategori Adı")
+        @Html.TextBoxFor(x=>x.KategoriAd, new { @class="form-control", @style="margin-left: 20px;" })
+    </div>
+
+    <button class="btn btn-success btn-block" style="width: 315px;"> Kaydet </button>
+</form>

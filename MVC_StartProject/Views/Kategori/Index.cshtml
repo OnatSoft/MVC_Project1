@@ -1,0 +1,33 @@
+﻿@using MVC_StartProject.Models;
+@model List<KategoriTbl>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/KitapLayout.cshtml";
+}
+
+
+<h2>Kategoriler</h2>
+<br />
+<br />
+
+<table class="table table-bordered table-hover table-sm">
+    <tr>
+        <th>ID</th>
+        <th>Kategori Adı</th>
+        <th>İşlemler</th>
+    </tr>
+
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.ID</td>
+            <td>@x.KategoriAd</td>
+            <td>
+                <a style="margin-right: 10px;" href="/Kategori/KategoriSil/@x.ID" class="btn btn-default btn-danger"> Sil </a>
+                <a href="/Kategori/KategoriGetir/@x.ID" class="btn btn-default btn-info"> Güncelle </a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Kategori/KategoriEkle" class="btn btn-primary btn-lg"> Yeni Kategori </a>
